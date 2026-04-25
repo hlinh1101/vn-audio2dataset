@@ -1,0 +1,55 @@
+project_name: vn-audio2dataset
+
+audio:
+  vad_sample_rate: 16000
+  master_sample_rate: 44100
+  target_sample_rate: 22050
+  channels: 1
+  normalize: true
+
+segments:
+  min_sec: 3.0
+  max_sec: 10.0
+  ideal_min: 4.5
+  ideal_max: 8.0
+  merge_gap_sec: 0.5
+  force_split_target_sec: 8.0
+
+vad:
+  sampling_rate: 16000
+  min_silence_ms: 250
+  speech_pad_ms: 100
+  min_speech_ms: 250
+  threshold: 0.5
+
+transcription:
+  model_size: large-v3
+  language: vi
+  beam_size: 5
+  compute_type: float16
+  device: auto
+
+cleaning:
+  lowercase_text: false
+  remove_emojis: true
+  strip_quotes: false
+
+filter:
+  min_sec: 3.0
+  max_sec: 10.0
+  min_words: 3
+  max_chars: 180
+  min_rms:
+  max_no_speech_prob:
+  min_avg_logprob:
+  max_unusual_symbol_ratio: 0.2
+
+paths:
+  raw_dir: data/raw
+  processed_dir: data/processed
+  output_dir: data/output
+  rejects_dir: data/rejects
+
+logging:
+  level: INFO
+  log_file:
