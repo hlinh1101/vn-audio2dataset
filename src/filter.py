@@ -80,8 +80,6 @@ def evaluate_text_quality(record: dict[str, Any], config: AppConfig) -> dict[str
         reasons.append("marked_empty_after_cleaning")
     if word_count < config.filter.min_words:
         reasons.append("word_count_too_low")
-    if char_count > config.filter.max_chars:
-        reasons.append("char_count_too_high")
     if (
         config.filter.max_unusual_symbol_ratio is not None
         and cleaned_text
@@ -233,6 +231,7 @@ def filter_all(
                 "max_sec": config.filter.max_sec,
                 "min_words": config.filter.min_words,
                 "max_chars": config.filter.max_chars,
+                "max_chars_mode": "metadata_only",
                 "min_rms": config.filter.min_rms,
                 "max_no_speech_prob": config.filter.max_no_speech_prob,
                 "min_avg_logprob": config.filter.min_avg_logprob,

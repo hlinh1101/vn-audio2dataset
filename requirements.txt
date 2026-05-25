@@ -3,3 +3,5 @@ silero-vad>=5.1
 numpy
 soundfile>=0.12.1
 faster-whisper>=1.1.0
+elevenlabs
+python-dotenv

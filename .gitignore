@@ -11,6 +11,7 @@ env/
 *.log
 *.tmp
 *.bak
+tests/*.wav
 
 .DS_Store
 Thumbs.db

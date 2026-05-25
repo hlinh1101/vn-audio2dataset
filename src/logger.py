@@ -23,6 +23,11 @@ def setup_logger(
     logger.propagate = False
     logger.handlers.clear()
 
+    try:
+        sys.stdout.reconfigure(errors="replace")
+    except Exception:
+        pass
+
     formatter = logging.Formatter(
         fmt="%(asctime)s | %(levelname)-8s | %(name)s | %(message)s",
         datefmt="%Y-%m-%d %H:%M:%S",

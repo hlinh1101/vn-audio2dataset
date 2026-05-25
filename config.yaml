@@ -1,4 +1,5 @@
 project_name: vn-audio2dataset
+transcription_backend: elevenlabs
 
 audio:
   vad_sample_rate: 16000
@@ -9,7 +10,7 @@ audio:
 
 segments:
   min_sec: 3.0
-  max_sec: 10.0
+  max_sec: 15.0
   ideal_min: 4.5
   ideal_max: 8.0
   merge_gap_sec: 0.5
@@ -34,10 +35,95 @@ cleaning:
   remove_emojis: true
   strip_quotes: false
 
-filter:
+audio_quality:
   min_sec: 3.0
   max_sec: 10.0
+  silence_threshold_dbfs: -55.0
+  min_rms_dbfs: -28.0
+  review_min_rms_dbfs: -24.0
+  max_silence_ratio: 0.35
+  review_silence_ratio: 0.2
+  max_leading_silence_sec: 0.35
+  review_leading_silence_sec: 0.15
+  max_trailing_silence_sec: 0.35
+  review_trailing_silence_sec: 0.15
+  max_clipping_ratio: 0.01
+  review_clipping_ratio: 0.002
+  max_spectral_flatness: 0.2
+  review_spectral_flatness: 0.1
+  max_high_freq_energy_ratio: 0.3
+  review_high_freq_energy_ratio: 0.18
+
+stt_segmentation:
+  model_id: scribe_v2
+  timestamps_granularity: word
+  diarize: true
+  tag_audio_events: true
+  num_speakers:
+  diarization_threshold:
+  dominant_speaker: auto
+  speaker_selection_mode: manual
+  default_target_speaker: auto
+  require_manual_speaker: true
+  per_file_target_speakers:
+    mc1: speaker_0
+    mc2: speaker_0
+    mc3: speaker_0
+    mc4: speaker_0
+    mc5: speaker_0
+    mc6: speaker_0
+    mc7: speaker_0
+    mc8: speaker_0
+    mc9: speaker_0
+    mc10: speaker_0
+    mc11: speaker_0
+    mc12: speaker_0
+    mc13: speaker_0
+    mc14: speaker_0
+    mc15: speaker_0
+    mc16: speaker_1
+    mc17: speaker_0
+    mc18: speaker_0
+    mc19: speaker_0
+    mc20: speaker_0
+    mc21: speaker_0
+    mc22: speaker_0
+    mc23: speaker_1
+    mc24: speaker_0
+    mc25: speaker_0
+    mc26: speaker_0
+    mc27: speaker_1
+    mc28: speaker_0
+    mc29: speaker_0
+    mc30: speaker_1
+    mc31: speaker_0
+    mctest: speaker_0
+  min_speaker_share: 0.45
+  boundary_pad_sec: 0.05
+  boundary_guard_sec: 0.2
+  max_word_gap_sec: 0.8
+  preferred_min_sec: 5.0
+  preferred_max_sec: 10.0
+  semantic_max_sec: 15.0
+  sentence_punctuation_weight: 8.0
+  # Backward-compatible legacy key; commas/clauses are not STT boundaries.
+  clause_punctuation_weight: 4.0
+  pause_strong_sec: 0.45
+  pause_medium_sec: 0.25
+  pause_strong_weight: 5.0
+  pause_medium_weight: 2.5
+  min_boundary_score: 7.0
+  allow_short_clips: false
+  protect_named_entities: true
+  protect_connector_phrases: true
   min_words: 3
+  min_avg_logprob:
+
+filter:
+  min_sec: 3.0
+  max_sec: 15.0
+  min_words: 3
+  # Diagnostic only; character count is kept in metadata but does not reject rows.
   max_chars: 180
   min_rms:
   max_no_speech_prob:
